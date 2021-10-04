@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+</head>
+<link rel="stylesheet" href="dec.css">
+  <!-- 引入 Bootstrap -->
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <div id="header">
+        <blockquote>
+            时间就像海绵里的水，。
+            <small>鲁迅 </small>
+          </blockquote>
+        <div class="mes"> <p class="text-center"></p> 我的TodoList</div>
+        <div class="textline">        
+            <div class="input-group">
+            <input type="text" id="add_list" class="form-control" placeholder="请输入待办事宜" >
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" >Go!</button>
+            </span>
+        </div>
+    </div>
+    </div>
+    <div class="body">
+        <h1>未完成<span id="todocount">1</span></h1>
+        <ul id="Todo">
+            
+        </ul>
+        <h1>已完成<span id="donecount">1</span></h1>
+        <ul id="Done">
+
+        </ul>
+
+        <div id="clear">
+        <button type="button" class="btn btn-default">阴间模式</button>  
+        <button type="button" class="btn btn-warning">全部清除</button>
+        <button type="button" class="btn btn-success">阳间模式</button>  
+        </div>
+        
+    </div>
+</body>
+<script src="thing.js"></script>
+  <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 包括所有已编译的插件 -->
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>
