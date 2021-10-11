@@ -1,4 +1,4 @@
-const { loadavg } = require("os");
+
 
 function addTodoList(e){
     // 初始化
@@ -27,6 +27,7 @@ function addTodoList(e){
     // 输入焦点恢复
     document.getElementById('add_list').focus="";
 }
+// 声明 加载函数
 function load(){
     // 定义参数
     var todo=document.getElementById("Todo");
@@ -79,11 +80,53 @@ function edit(i){
     pContent = p.innerHTML;
     inputId;
 }
+// 声明update函数
+function update(i, field, value) {
+    todolist[i][field] = value;
+    saveData(todolist);
+    load();
+}
 // 保险函数
 function confirm(){
-
     if(inputId.value.length === 0){
         p.innerHTML = pContent;
         alert("内容不得为空")
+    }else{
+        update(i,"todo",inputId.value)
     }
+}
+// 绑定enter事件
+function enter (e){
+    if(e.KeyCode === 13)
+    // 按下enter键
+    {
+        confirm();
+    }
+    p.innerHTML = "<input type='text' id='input-"+i+"' value='"+pContent+"'>";
+    inputId = document.getElementById('input-'+i);
+    inputId.focus();
+    inputId.setSelectionRange(0, inputId.value.length);
+}
+function remove(i) {
+    todolist.splice(i, 1);
+    saveData(todolist); //相同名称的缓存会覆盖，更新缓存 
+    load();
+}
+// 将用户数据保存值本地缓存 将JS对象转换成JSON对象存进本地缓存
+function saveData(data) {
+    localStorage.setItem("mytodolist", JSON.stringify(data));   
+}
+// 清除本地缓存
+function clear() {
+    localStorage.clear();
+    load();
+}
+
+// 从本地缓存中获取数据
+function loadData() {
+    var hisTory = localStorage.getItem("mytodolist");
+    if(hisTory !=null){
+        return JSON.parse(hisTory);     //JSON对象转换为JS对象
+    }
+    else { return []; }
 }
