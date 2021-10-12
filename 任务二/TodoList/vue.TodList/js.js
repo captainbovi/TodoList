@@ -17,30 +17,24 @@ var vm = new Vue({
         todo:'',
         edtorTodos:'',//记录正在编辑的数据,
         beforeTitle:"",//记录正在编辑的数据的title
-        visibility:"all"//通过这个属性值的变化对数据进行筛选
+        visibility:"all",//通过这个属性值的变化对数据进行筛选
     },
     watch:{
-        //下面的这种方法是浅监控
-      /*list:function(){//监控list这个属性，当这个属性对应的值发生变化就会执行函数
+      list:function(){//监控list这个属性，当这个属性对应的值发生变化就会执行函数
           store.save("storeData",this.list);
-      }*/
-      //下面的是深度监控
-        list:{
-            handler:function(){
-                store.save("storeData",this.list);
-            },
-            deep:true
-        }
- 
+      }
     },
     methods:{
         enterFn(ev){//添加任务
             //向list中添加一项任务
-            //事件处理函数中的this指向的是当前这个根实例
             if(this.todo==""){return;}
+            var currentTime = new Date();
+            var timeNumber = Date.parse(currentTime);
                 this.list.push({
                     title:this.todo,
-                    isComplete:false
+                    isComplete:false,
+                    time:currentTime,
+                    timeCount:timeNumber
                 });
                 this.todo = "";
         },
@@ -55,21 +49,34 @@ var vm = new Vue({
         },
         edtoEnd(item){//编辑完成
             this.edtorTodos="";
-            // this.cancelEdit = this.edtorTodos;
         },
         cancelEdit(item){//取消编辑
             item.title = this.beforeTitle;
             this.beforeTitle = '';
             this.edtorTodos='';
-        }
+        },
+        sortByITime(){
+            this.list.sort((a,b)=>{
+                return a.timeCount<b.timeCount;
+            })
+        },
+        sortByDTime(){
+            this.list.reverse();
+        },
     },
-    directives:{
-        "focus":{
-            update(el,binding){
-                if(binding.value){
-                    el.focus();
-                }
-            }
+     directives:{
+         "focus":{
+             update(el,binding){
+                 if(binding.value){
+                     el.focus();
+                 }
+             }
+         }
+     },
+    mounted(){
+        window.onbeforeunload = function(e){
+            var storage = window.localStorage;
+            storage.clear();
         }
     },
     computed:{
@@ -101,9 +108,20 @@ var vm = new Vue({
  
     }
 });
-function hashFn(){
-    var hash = window.location.hash.slice(1);
-    vm.visibility = hash;
+function sunMod(){
+	var body = document.body;
+	body.style.backgroundColor = "white";
+	// console.log(1);
 }
-hashFn();
-window.addEventListener('hashchange',hashFn);
+function nightMode(){
+	var body = document.body;
+	body.style.backgroundColor = "grey";
+}
+ function hashFn(){
+     var hash = window.location.hash.slice(1);
+     vm.visibility = hash;
+ }
+ hashFn();
+ window.addEventListener('hashchange',hashFn);
+document.getElementById("sunMod").onclick =sunMod;
+document.getElementById("nightMod").onclick =nightMode;

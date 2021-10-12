@@ -4,24 +4,42 @@
     <meta charset="UTF-8">
     <title>我的TODLIST</title>
     <link rel="stylesheet" href="dec.css">
-    <!-- 引入vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+     <!-- 引入 Bootstrap -->
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-top">
     <div class="page-content">
-        <h2>任务计划列表</h2>
+        <h2>我的TodoList</h2>
     </div>
+    <blockquote>
+        时间就像海绵里的水，只要愿挤，总会有的。
+        <small>鲁迅</small>
+      </blockquote>
 </div>
 <div class="main">
     <h3 class="big-title">添加任务：</h3>
-    <input
-            placeholder="例如：吃饭睡觉打豆豆；    提示：+回车即可添加任务"
+    <div class="input-group">
+        <input type="text" class="form-control"
+        placeholder="按回车即可添加任务"
+        class="task-input"
+        type="text"
+       v-on:keyup.enter="enterFn"
+        v-model="todo"
+        >
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button"
+            @click = 'enterFn'
+            >Go!</button>
+        </span>
+    </div>
+    <!-- <input
+            placeholder="按回车即可添加任务"
             class="task-input"
             type="text"
            v-on:keyup.enter="enterFn"
             v-model="todo"
-    />
+    /> -->
     <ul class="task-count">
         <li>{{unComplete}}个任务未完成</li>
         <li class="action">
@@ -44,7 +62,7 @@
                            type="checkbox"
                            v-model="item.isComplete"
                     />
-                    <label @dblclick="edtorTodo(item)">{{item.title}}</label>
+                    <label @dblclick="edtorTodo(item)">{{item.title}} 生成日期：{{ item.time}}</label>
                     <button
                             class="destroy"
                             @click="delFn(item)"
@@ -62,7 +80,17 @@
             </li>
         </ul>
     </div>
+    <footer>
+            <button type="button" class="btn btn-default" id="nightMod">阴间模式</button>  
+            <button type="button" class="btn btn-success" id="sunMod">阳间模式</button>  
+            <button type="button" class="btn btn-warning" @click = "clear()">全部清除</button>
+            <button type="button" class="btn btn-default" @click="sortByITime">顺序</button>  
+            <button type="button" class="btn btn-success" @click="sortByDTime">反转</button>  
+		</footer>
 </div>
+<!-- 引入vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script src="js.js"></script>
+
 </body>
 </html>
