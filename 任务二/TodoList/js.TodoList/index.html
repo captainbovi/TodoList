@@ -1,51 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TodoList</title>
-</head>
-<link rel="stylesheet" href="dec.css">
-  <!-- 引入 Bootstrap -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+		<title>ToDoList—最简单的待办事项列表</title>
+		<meta name="description" content="数据存储在用户浏览器的html5本地数据库里" />
+		<link rel="stylesheet" href="dec.css">
+         <!-- 引入 Bootstrap -->
   <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<body>
-    <div id="header">
-        <blockquote>
-            时间就像海绵里的水，只要愿挤，总会有的。
-            <small>鲁迅</small>
-          </blockquote>
-        <div class="mes"> <p class="text-center"></p> 我的TodoList</div>
-        <div class="textline">        
-            <div class="input-group">
-            <input type="text" id="add_list" class="form-control" placeholder="请输入待办事宜" >
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" >Go!</button>
-            </span>
-        </div>
-    </div>
-    </div>
-    <div class="body">
-        <h1>未完成<span id="todocount"></span></h1>
-        <ul id="Todo">
-            
-        </ul>
-        <h1>已完成<span id="donecount"></span></h1>
-        <ul id="Done">
-            
-        </ul>
-
-        <div id="clear">
-        <button type="button" class="btn btn-default">阴间模式</button>  
-        <button type="button" class="btn btn-warning">全部清除</button>
-        <button type="button" class="btn btn-success">阳间模式</button>  
-        </div>
-        
-    </div>
-</body>
-<script src="thing.js"></script>
-  <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
-  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-  <!-- 包括所有已编译的插件 -->
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		 <header>
+			 <section>
+				<form action="javascript:postaction()" id="form">
+					<label for="title">我的TodoList</label>
+					<input type="text" id="title" name="title" placeholder="请输入要办理事务（按回车确认）" required="required"  />
+				</form>
+			</section>
+            <blockquote>
+                时间就像海绵里的水，只要愿挤，总会有的。
+                <small>鲁迅</small>
+              </blockquote>
+		</header>
+		<section> 
+			<h2 onclick="save()">待完成 <span id="todocount"></span></h2>
+			<ol id="todolist" class="demo-box">
+			</ol>
+			<h2>已完成 <span id="donecount"></span></h2>
+			<ul id="donelist">
+			</ul>
+		</section>
+		<footer>
+            <button type="button" class="btn btn-default" id="nightMod">阴间模式</button>  
+            <button type="button" class="btn btn-success" id="sunMod">阳间模式</button>  
+            <button type="button" class="btn btn-warning" id="clearButton">全部清除</button>
+            <button type="button" class="btn btn-default" id="sortByDTime">顺序</button>  
+            <button type="button" class="btn btn-success" id="sortByITime">逆序</button>  
+		</footer>
+		<script type="text/javascript" src="asd.js"></script>
+	</body>
 </html>
